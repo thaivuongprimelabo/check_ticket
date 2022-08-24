@@ -5,6 +5,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
 type TicketList = {
+  id: number;
   ticketNumber: number;
   result: boolean;
   checkDatetime: String;
@@ -17,31 +18,37 @@ const Home: NextPage = () => {
   useEffect(() => {
     setTickets([
       {
+        id: 1,
         ticketNumber: 123456,
         result: false,
         checkDatetime: "23/08/2022 14:20"
       },
       {
+        id: 2,
         ticketNumber: 345678,
         result: true,
         checkDatetime: "23/08/2022 14:20"
       },
       {
+        id: 3,
         ticketNumber: 222333,
         result: true,
         checkDatetime: "23/08/2022 14:20"
       },
       {
+        id: 4,
         ticketNumber: 123456,
         result: false,
         checkDatetime: "23/08/2022 14:20"
       },
       {
+        id: 5,
         ticketNumber: 345678,
         result: true,
         checkDatetime: "23/08/2022 14:20"
       },
       {
+        id: 6,
         ticketNumber: 222333,
         result: true,
         checkDatetime: "23/08/2022 14:20"
@@ -51,7 +58,7 @@ const Home: NextPage = () => {
 
   const renderTicketRow = (): ReactNode => {
     return tickets.map((ticket) => {
-      return <tr>
+      return <tr key={ticket.id}>
         <td className="g-white border-b dark:bg-gray-800 dark:border-gray-700 py-3 px-6 border border-current">{ticket.ticketNumber}</td>
         <td className="g-white border-b dark:bg-gray-800 dark:border-gray-700 py-3 px-6 border border-current">{ticket.result ? "Good" : "Failed"}</td>
         <td className="g-white border-b dark:bg-gray-800 dark:border-gray-700 py-3 px-6 border border-current">{ticket.checkDatetime}</td>
