@@ -1,9 +1,64 @@
 import type { NextPage } from 'next'
+import { useState, useEffect, ReactNode } from 'react';
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
+type TicketList = {
+  ticketNumber: number;
+  result: boolean;
+  checkDatetime: String;
+}
+
 const Home: NextPage = () => {
+
+  const [tickets, setTickets] = useState<TicketList[]>([]);
+
+  useEffect(() => {
+    setTickets([
+      {
+        ticketNumber: 123456,
+        result: false,
+        checkDatetime: "23/08/2022 14:20"
+      },
+      {
+        ticketNumber: 345678,
+        result: true,
+        checkDatetime: "23/08/2022 14:20"
+      },
+      {
+        ticketNumber: 222333,
+        result: true,
+        checkDatetime: "23/08/2022 14:20"
+      },
+      {
+        ticketNumber: 123456,
+        result: false,
+        checkDatetime: "23/08/2022 14:20"
+      },
+      {
+        ticketNumber: 345678,
+        result: true,
+        checkDatetime: "23/08/2022 14:20"
+      },
+      {
+        ticketNumber: 222333,
+        result: true,
+        checkDatetime: "23/08/2022 14:20"
+      }
+    ])
+  }, []);
+
+  const renderTicketRow = (): ReactNode => {
+    return tickets.map((ticket) => {
+      return <tr>
+        <td className="g-white border-b dark:bg-gray-800 dark:border-gray-700 py-3 px-6 border border-current">{ticket.ticketNumber}</td>
+        <td className="g-white border-b dark:bg-gray-800 dark:border-gray-700 py-3 px-6 border border-current">{ticket.result ? "Good" : "Failed"}</td>
+        <td className="g-white border-b dark:bg-gray-800 dark:border-gray-700 py-3 px-6 border border-current">{ticket.checkDatetime}</td>
+      </tr>
+    })
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -26,21 +81,7 @@ const Home: NextPage = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="g-white border-b dark:bg-gray-800 dark:border-gray-700 py-3 px-6 border border-current">123456</td>
-                <td className="g-white border-b dark:bg-gray-800 dark:border-gray-700 py-3 px-6 border border-current">Failed</td>
-                <td className="g-white border-b dark:bg-gray-800 dark:border-gray-700 py-3 px-6 border border-current">23/08/2022 12:17:40</td>
-              </tr>
-              <tr>
-                <td className="g-white border-b dark:bg-gray-800 dark:border-gray-700 py-3 px-6 border border-current">123456</td>
-                <td className="g-white border-b dark:bg-gray-800 dark:border-gray-700 py-3 px-6 border border-current">Failed</td>
-                <td className="g-white border-b dark:bg-gray-800 dark:border-gray-700 py-3 px-6 border border-current">23/08/2022 12:17:40</td>
-              </tr>
-              <tr>
-                <td className="g-white border-b dark:bg-gray-800 dark:border-gray-700 py-3 px-6 border border-current">123456</td>
-                <td className="g-white border-b dark:bg-gray-800 dark:border-gray-700 py-3 px-6 border border-current">Failed</td>
-                <td className="g-white border-b dark:bg-gray-800 dark:border-gray-700 py-3 px-6 border border-current">23/08/2022 12:17:40</td>
-              </tr>
+              {renderTicketRow()}
             </tbody>
           </table>
         </div>
